@@ -203,6 +203,8 @@ alias usetpxy="networksetup -setwebproxystate wi-fi off; networksetup -setsecure
 # TODO: write setup script and add to repo readme
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
+alias less="less -i"
+
 if [ $((RANDOM%10)) -eq 0 ]; then
    fortune | cowsay -f $(ls /usr/local/Cellar/cowsay/3.04/share/cows | shuf -n 1) | lolcat -a -f -t -s 5000 || true
 fi
