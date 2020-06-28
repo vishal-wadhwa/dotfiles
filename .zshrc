@@ -186,11 +186,11 @@ alias help=run-help
 function urlencode() { jq -nr --arg v "$1" '$v|@uri'; }
 function urldecode() { printf $(echo -n $@ | sed 's/\\/\\\\/g;s/\(%\)\([0-9a-fA-F][0-9a-fA-F]\)/\\x\2/g')"\n" }
 
-# deeplink encode/decode
-function dlenc() {
+# url+base64 encode/decode
+function b64uenc() {
     urlencode $(echo -n "$1" | base64)
 }
-function dldec() {
+function ub64dec() {
     urldecode "$1" | base64 -D
 }
 
