@@ -375,7 +375,6 @@ set mouse+=a
 " --------- EXTRAS ------------------
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
-nmap <C-a> <Nop> " avoid conflict with tmux prefix
 
 " TODO: add non existing dir handling
 " swap files at central place. needs dir to exist. // means full path
