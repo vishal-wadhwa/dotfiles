@@ -462,7 +462,9 @@ augroup END
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-map <C-p> :FZF <CR>
+map <C-p> :FZF<cr>
+map <leader>p :Buffers<cr>
+map <leader>f :Rg<space>
 
 " == BufExplorer ==
 " Plug 'jlanzarotta/bufexplorer'
