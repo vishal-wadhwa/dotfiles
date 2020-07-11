@@ -56,7 +56,7 @@ syntax on
 filetype plugin indent on
 
 " Show matching brackets when text indicator is over them
-set showmatch 
+set showmatch
 
 " Use spaces instead of tabs
 " set expandtab
@@ -68,10 +68,16 @@ set smarttab
 set cindent
 set cinoptions=(0,u0,U0
 
+set tabstop=4           " Tab width
+set softtabstop=4       " Soft tab width
+set shiftwidth=4        " Shift width
+set expandtab           " Use spaces instead of tabs
+
+" MOVED TO ftplugin/
 " 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-set softtabstop=0 " for tabs
+" set shiftwidth=4
+" set tabstop=4
+" set softtabstop=0 " for tabs
 " set tabstop=4 " to be used with expandtab - read tabstop docs
 
 " Use indent from current line
@@ -182,8 +188,8 @@ map <leader>h :bprevious<cr>
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove 
-map <leader>t<leader> :tabnext 
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -347,7 +353,7 @@ Plug 'jiangmiao/auto-pairs'
 " dont jump to next closing brace when inserting a closing brace 
 " https://github.com/jiangmiao/auto-pairs/issues/242
 let g:AutoPairsWildClosedPair = ''
- 
+
 " == Code commenting ==
 Plug 'tpope/vim-commentary'
 
