@@ -689,6 +689,12 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 
+" == Remote Yank ==
+" [SECURITY RISK on shared systems]
+" uses osc52 escape sequence
+Plug 'fcpg/vim-osc52'
+command! YankToLocal call SendViaOSC52(getreg('"'))
+
 " == CTRL P ==
 " CtrlP file search
 " let g:ctrlp_lazy_update = 0
