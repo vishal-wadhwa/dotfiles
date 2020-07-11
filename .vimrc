@@ -100,9 +100,54 @@ set colorcolumn=80,100,120
 highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " code folding
-" set foldmethod=syntax
-set foldmethod=manual
+set foldmethod=syntax
+" disable auto fold on buffer open
+set foldlevelstart=99
+
+" use old regex engine for perf
+set re=1
+
+syntax sync minlines=600
+noremap <F12> <Esc>:syntax sync fromstart<CR>
+inoremap <F12> <C-o>:syntax sync fromstart<CR>
+
+" correct syntax highlight when using jsonc
+augroup jsonc_syntac
+    autocmd!
+    autocmd FileType json syntax match Comment +\/\/.\+$+
+augroup END
+
+" fast file open for very large files - more like stupid files with very long
+" lines
+augroup folding
+    autocmd!
+    autocmd FileType php set foldmethod=indent
+    " autocmd FileType php if getfsize(@%) > 512*1024 | setlocal foldmethod=indent | endif
+augroup END
 " --------------------------------
+
+" ------ FORMATTING -------------
+augroup formatters
+    au!
+    autocmd FileType c,cpp,java,proto setlocal equalprg=clang-format\ -style='{BasedOnStyle:\ microsoft,BreakBeforeBraces:\ Attach,AlignTrailingComments:\ true,IndentWidth:\ 4}'
+    " || true at the end is to avoid NZEC in phpcbf for multiple reasons
+    " use phpcs --config-set to set standards
+    autocmd FileType php setlocal equalprg=phpcbf\ -d\ memory_limit=512M\ \|\|\ true
+augroup END
+
+" Function to trim whitespace and preserve cursor position and history
+fun! TrimWhitespace()
+    let l:save = winsaveview()
+    keeppatterns %s/\s\+$//e
+    call winrestview(l:save)
+endfun
+
+" wildmenu command
+command! TrimWhitespace call TrimWhitespace()
+
+" shortcut
+noremap <leader>w :call TrimWhitespace()<cr>
+"
 
 " -------- STATUS LINE -----------
 " Always show the status line at the bottom, even if you only have one window open.
@@ -151,12 +196,15 @@ set hidden
 set autoread
 au FocusGained,BufEnter * checktime
 
-" :W sudo saves the file 
+" :W sudo saves the file
 " (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup cursor_pos
+    au!
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+augroup END
 
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
@@ -308,13 +356,16 @@ set mouse+=a
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 nmap <C-a> <Nop> " avoid conflict with tmux prefix
+
+" fixes weird out of memory issues in large php files
+set maxmempattern=5000
 " ----------------------------------
 
 " ----- PLUGIN MANAGER --------------
 " VimPlug install (place it before plugin#begin())
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-	\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 " ------------------------------------
@@ -355,13 +406,23 @@ Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 " fix for https://github.com/jiangmiao/auto-pairs/issues/217
 " inoremap <expr> <CR> strcharpart(getline('.'),getpos('.')[2]-1,1) == '}' ? "\<CR>\<Esc>O" : "<CR>"
- 
-" dont jump to next closing brace when inserting a closing brace 
+
+" php no close
+augroup autopairs
+    au!
+    au FileType php      let b:AutoPairs = AutoPairsDefine({'<?' : '', '<?php': ''})
+augroup END
+
+" dont jump to next closing brace when inserting a closing brace
 " https://github.com/jiangmiao/auto-pairs/issues/242
 let g:AutoPairsWildClosedPair = ''
 
 " == Code commenting ==
 Plug 'tpope/vim-commentary'
+augroup vimcommentary_php
+    autocmd!
+    autocmd FileType php setlocal commentstring=//\ %s
+augroup END
 
 " == FZF == (giving this a try over ctrlp)
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -405,6 +466,24 @@ let g:go_def_reuse_buffer = 1
 let g:go_metalinter_autosave = 0
 " rename command
 let g:go_rename_command = 'gopls'
+
+" == SYNTASTIC ==
+Plug 'vim-syntastic/syntastic'
+" linters
+let g:syntastic_loc_list_height = 6
+let g:syntastic_error_symbol = '✖'
+let g:syntastic_style_error_symbol = '✖'
+let g:syntastic_warning_symbol = '!'
+let g:syntastic_style_warning_symbol = '!'
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_ignore_files = ['\mvendor/']
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_go_gometalinter_args = ['--disable-all', '--enable=errcheck']
+let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['go'] } " passive mode for lightline
 
 " == TOML support ==
 Plug 'cespare/vim-toml'
