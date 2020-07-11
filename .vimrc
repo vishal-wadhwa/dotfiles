@@ -373,10 +373,22 @@ set mouse+=a
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 nmap <C-a> <Nop> " avoid conflict with tmux prefix
 
+" TODO: add non existing dir handling
+" swap files at central place. needs dir to exist. // means full path
+set directory^=$HOME/.vim/_swap//
+
+" file backups at central place
+set backup
+set backupdir^=$HOME/.vim/_backup//
+
 " fixes weird out of memory issues in large php files
 set maxmempattern=5000
 " ----------------------------------
 
+" ---------- COMMAND LINE / EX MODE -
+" history num
+set history=1000
+" ----------------------------------
 " ----- PLUGIN MANAGER --------------
 " VimPlug install (place it before plugin#begin())
 if empty(glob('~/.vim/autoload/plug.vim'))
