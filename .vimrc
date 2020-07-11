@@ -469,6 +469,7 @@ map <leader>f :Rg<space>
 " == BufExplorer ==
 " Plug 'jlanzarotta/bufexplorer'
 Plug 'fholgado/minibufexpl.vim'
+let g:miniBufExplMaxSize = 1
 
 " == YCM (disabling in favour of coc.nvim) ==
 " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
