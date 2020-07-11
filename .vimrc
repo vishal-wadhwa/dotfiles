@@ -157,8 +157,11 @@ set laststatus=2
 set ruler
 
 " status bar colors
-au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
-au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+augroup status_bar_colors
+    au!
+    au InsertEnter * hi statusline guifg=black guibg=#d7afff ctermfg=black ctermbg=magenta
+    au InsertLeave * hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
+augroup END
 hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
 " --------------------------------
 
@@ -178,9 +181,9 @@ set relativenumber
 set number relativenumber
 " set numberwidth=3
 augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
-  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set rnu   | endif
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set nornu | endif
 augroup END
 " -----------------------------------
 
@@ -194,7 +197,10 @@ set hidden
 
 " Set to auto read when a file is changed from the outside and warn to reload
 set autoread
-au FocusGained,BufEnter * checktime
+augroup file_reload
+    au!
+    au FocusGained,BufEnter * checktime
+augroup END
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
@@ -248,7 +254,10 @@ map <leader>t<leader> :tabnext
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+augroup tab_toggle
+    au!
+    au TabLeave * let g:lasttab = tabpagenr()
+augroup END
 " -----------------------------------
 
 " --------- WINDOWS -----------------
@@ -271,34 +280,41 @@ set incsearch
 
 " For regular expressions turn magic on
 set magic " on by default
+
+" Show search count
+set shortmess-=S
 " -----------------------------------
 
 " --------- CLIPBOARD ---------------
 " copy buffer file path
-nmap <leader>cp :let @+ = expand("%")<CR>
+if has('clipboard')
+    nmap <leader>cp :let @+ = expand("%")<CR>
+else
+    nmap <leader>cp :let @" = expand("%")<CR>
+endif
 
 " sync clipboards
 set clipboard+=unnamed
 
 " paste with correct indent - https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
 function! WrapForTmux(s)
-  if !exists('$TMUX')
-    return a:s
-  endif
+    if !exists('$TMUX')
+        return a:s
+    endif
 
-  let tmux_start = "\<Esc>Ptmux;"
-  let tmux_end = "\<Esc>\\"
+    let tmux_start = "\<Esc>Ptmux;"
+    let tmux_end = "\<Esc>\\"
 
-  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+    return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
 endfunction
 
 let &t_SI .= WrapForTmux("\<Esc>[?2004h")
 let &t_EI .= WrapForTmux("\<Esc>[?2004l")
 
 function! XTermPasteBegin()
-  set pastetoggle=<Esc>[201~
-  set paste
-  return ""
+    set pastetoggle=<Esc>[201~
+    set paste
+    return ""
 endfunction
 
 inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
@@ -381,7 +397,10 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " NerdTree auto-close if last
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup nerdtree_autoclose
+    au!
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
 " NerdTree leftside
 let g:NERDTreeWinPos = "left"
