@@ -338,6 +338,10 @@ endif
 
 " Fill first match and then cycle with <Tab> and <S-Tab>
 set wildmode=longest:full,full
+
+" INSERT MODE COMPLETIONS
+" set complete-=i " dont give completions from included files
+
 " ----------------------------------
 
 " - SPELL CHECK (needs config improvement) ------------
@@ -361,8 +365,8 @@ set lazyredraw
 
 " ----------- MOVEMENT --------------
 " keep gap of n lines while scrolling
-set scrolloff=3
-set sidescrolloff=3
+set scrolloff=1
+set sidescrolloff=5
 
 " Enable mouse support. You should avoid relying on this too much, but it can
 " sometimes be convenient.
