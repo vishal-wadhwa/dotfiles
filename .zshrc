@@ -145,8 +145,6 @@ export YSU_MESSAGE_POSITION="after"
 
 alias sudo='sudo '
 
-alias tcheat='cat ~/.zcode/tmux_cheats.txt'
-
 alias mntz="sshfs vishalwadhwa.eks.zdev.net:/var/www/zomato9 ~/zdev -oauto_cache,reconnect,defer_permissions,noappledouble,cache=yes,kernel_cache,cache_timeout=3600" #compression=no -> may not be useful
 alias umntz="diskutil unmount force ~/zdev"
 
