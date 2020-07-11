@@ -44,8 +44,14 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 " -------------------------------
 
 " --------- THEME (keep above others)
-colorscheme delek
+" colorscheme delek
 set background=dark
+set termguicolors
+
+"Sometimes setting 'termguicolors' is not enough and one has to set the t_8f and t_8b options explicitly
+":h xterm-true-color
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " -----------------------------------
 
 " ---------- VIEW/SYNTAX --------
@@ -416,15 +422,42 @@ Plug 'tpope/vim-unimpaired'
 " == protobuf syntax ==
 Plug 'uarun/vim-protobuf'
 
+" fixes colours breaking on save
+augroup myvimrc
+    au!
+    au BufWritePost init.vim,plugins.vim ++nested so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
+" gruvbox theme
+Plug 'morhetz/gruvbox'
+" Customize fzf colors to match your color scheme
+" if get(g:, 'colors_name', 'default') == "gruvbox"
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'border':  ['fg', 'Ignore'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+
 " == CTRL P ==
 " CtrlP file search
-let g:ctrlp_lazy_update = 0
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|DS_Store|vendor)|(\.(swp|ico|git|svn))$'
-let g:ctrlp_max_files=0
-let g:ctrlp_max_depth=40
-let g:ctrlp_show_hidden = 1
+" let g:ctrlp_lazy_update = 0
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+" let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist|DS_Store|vendor)|(\.(swp|ico|git|svn))$'
+" let g:ctrlp_max_files=0
+" let g:ctrlp_max_depth=40
+" let g:ctrlp_show_hidden = 1
 
 call plug#end()
 " -----------------------------------
+
+colorscheme gruvbox
