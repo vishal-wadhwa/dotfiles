@@ -709,11 +709,34 @@ let g:gutentags_ctags_extra_args = [
 " dont pollute project root with tags file
 let g:gutentags_cache_dir='~/.cache/vim/gutentags'
 
+" == statusline ==
+Plug 'itchyny/lightline.vim'
+
+let g:lightline = {
+            \ 'colorscheme': 'gruvbox',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+            \   'right': [ [ 'lineinfo' ],
+            \              [ 'percent' ],
+            \              [ 'fileformat', 'fileencoding', 'filetype' ],
+            \              [ 'gutentags' ] ]
+            \ },
+            \ 'component_function': {
+            \   'cocstatus': 'coc#status',
+            \   'gutentags': 'gutentags#statusline',
+            \   'currentfunction': 'CocCurrentFunction'
+            \ },
+            \ }
+
 " fixes colours breaking on save
 augroup myvimrc
     au!
     au BufWritePost init.vim,plugins.vim ++nested so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
 augroup END
+
+" dont show current mode
+set noshowmode
 
 " gruvbox theme
 Plug 'morhetz/gruvbox'
