@@ -681,6 +681,34 @@ Plug 'tpope/vim-unimpaired'
 " == protobuf syntax ==
 Plug 'uarun/vim-protobuf'
 
+" == ctags ==
+Plug 'ludovicchabant/vim-gutentags'
+
+" indication of gutentag running
+" set statusline+=%{gutentags#statusline()}
+
+" update statusline state
+augroup MyGutentagsStatusLineRefresher
+    autocmd!
+    autocmd User GutentagsUpdating call lightline#update()
+    autocmd User GutentagsUpdated call lightline#update()
+augroup END
+
+" filetype exclude list
+let g:gutentags_exclude_filetypes = ['go', 'html', 'javascript']
+
+" start generating as soon as vim is opened
+let g:gutentags_generate_on_empty_buffer=1
+
+" more tag info, see ctags --list-fields
+let g:gutentags_ctags_extra_args = [
+            \ '--tag-relative=yes',
+            \ '--fields=+ailmnS',
+            \ ]
+
+" dont pollute project root with tags file
+let g:gutentags_cache_dir='~/.cache/vim/gutentags'
+
 " fixes colours breaking on save
 augroup myvimrc
     au!
