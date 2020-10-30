@@ -805,3 +805,10 @@ call plug#end()
 " -----------------------------------
 
 colorscheme gruvbox
+
+" private vimrc
+try
+    source ~/.private.vimrc
+catch
+    " no issues
+endtry
