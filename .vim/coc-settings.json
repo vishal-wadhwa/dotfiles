@@ -1,0 +1,137 @@
+{
+    "languageserver": {
+        "go": {
+            "command": "gopls",
+            "args": ["-remote=auto"],
+            "rootPatterns": ["go.mod", ".git", "Gopkg.toml", "main.go"],
+            "filetypes": ["go"],
+            "trace.server":"verbose"
+        },
+        "intelephense": {
+            "command": "intelephense",
+            "args": ["--stdio"],
+            "filetypes": ["php"],
+            "trace.server":"verbose",
+            "settings": {
+                "intelephense": {
+                    "environment.phpVersion": "7.2.0",
+                    "files.maxSize": 10000000
+                }
+            },
+            "initializationOptions": {
+                "storagePath": "/tmp/.vim/intelephense"
+            }
+        }
+    },
+    "coc.preferences.hoverTarget":"float",
+    "diagnostic-languageserver.linters": {
+        "phpcs": {
+            "command": "phpcs",
+            "sourceName": "phpcs",
+            "debounce": 1000,
+            "args": ["--report=csv", "-q", "-d", "memory_limit=512M", "%file"],
+            "formatLines": 1,
+            "formatPattern": [
+                "^.+,(\\d+),(\\d+),(\\S+),\"(.+)\",.+,\\d+,(\\d)$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "message": [4, "\nAutoFix(", 5, ")"],
+                    "security": 3
+                }
+            ],
+            "securities": {
+                "error": "error",
+                "warning": "warning"
+            }
+        },
+        "shellcheck": {
+            "sourceName": "shellcheck",
+            "command": "shellcheck",
+            "debounce": 1000,
+            "args": [
+                "--format",
+                "json",
+                "-"
+            ],
+            "parseJson": {
+                "line": "line",
+                "column": "column",
+                "endLine": "endLine",
+                "endColumn": "endColumn",
+                "message": "${message} [${code}]",
+                "security": "level"
+            },
+            "securities": {
+                "error": "error",
+                "warning": "warning",
+                "info": "info",
+                "style": "hint"
+            }
+        },
+        "golint": {
+            "sourceName": "golint",
+            "command": "golint",
+            "debounce": 1000,
+            "args": ["%file"],
+            "formatLines": 1,
+            "formatPattern": [
+                "^.+:(\\d+):(\\d+): (.+)()$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "message": 3,
+                    "security": 4
+                }
+            ],
+            "securities": {
+                "": "warning"
+            }
+        },
+        "govet": { // probably ale handles it better
+            "sourceName": "govet",
+            "command": "go",
+            "debounce": 1000,
+            "args": ["vet", "./..."],
+            "isStderr": true,
+            "isStdout": false,
+            "formatLines": 1,
+            "formatPattern": [
+                "^.+:(\\d+):(\\d+): (.+)()$",
+                {
+                    "line": 1,
+                    "column": 2,
+                    "message": 3,
+                    "security": 4
+                }
+            ],
+            "securities": {
+                "": "warning"
+            }
+        },
+        "revive": {
+            "sourceName": "revive",
+            "command": "revive",
+            "debounce": 2000,
+            "args": ["--formatter", "json", "%file"],
+            "parseJson": {
+                "line": "Position.Start.Line",
+                "column": "Position.Start.Column",
+                //   "endLine": "Position.End.Line",
+                //   "endColumn": "Position.End.Column",
+                "message": "[${Category}] ${Failure}\n${Replacement}",
+                "security": "Severity"
+            },
+            "securities": {
+                "error": "error",
+                "warning": "warning"
+            }
+        }
+    },
+    "diagnostic-languageserver.filetypes":{
+        "php": "phpcs",
+        "sh": "shellcheck",
+        "go": ["revive"]
+    },
+    "diagnostic-languageserver.trace.server": "messages"
+}
