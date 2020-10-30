@@ -133,7 +133,8 @@ augroup END
 " ------ FORMATTING -------------
 augroup formatters
     au!
-    autocmd FileType c,cpp,java,proto setlocal equalprg=clang-format\ -style='{BasedOnStyle:\ microsoft,BreakBeforeBraces:\ Attach,AlignTrailingComments:\ true,IndentWidth:\ 4}'
+    " autocmd FileType c,cpp,java,proto setlocal equalprg=clang-format\ -style='{BasedOnStyle:\ microsoft,BreakBeforeBraces:\ Attach,AlignTrailingComments:\ true,IndentWidth:\ 4,AllowShortEnumsOnASingleLine:\ false}'
+    autocmd FileType c,cpp,java,proto setlocal equalprg=clang-format
     " || true at the end is to avoid NZEC in phpcbf for multiple reasons
     " use phpcs --config-set to set standards
     autocmd FileType php setlocal equalprg=phpcbf\ -d\ memory_limit=512M\ \|\|\ true
