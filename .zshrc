@@ -204,6 +204,8 @@ alias tmux="env TERM=screen-256color tmux"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 export LESS=-iR
+[ -f ~/.less_termcap ] && . ~/.less_termcap
+
 
 if [ $((RANDOM%10)) -eq 0 ]; then
    fortune | cowsay -f $(ls /usr/local/Cellar/cowsay/3.04/share/cows | shuf -n 1) | lolcat -a -f -t -s 5000 || true
