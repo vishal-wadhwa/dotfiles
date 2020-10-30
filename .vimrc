@@ -743,16 +743,18 @@ let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+            \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ],
-            \              [ 'gutentags' ] ]
+            \              [ 'gutentags' ]
+            \   ]
             \ },
             \ 'component_function': {
             \   'cocstatus': 'coc#status',
             \   'gutentags': 'gutentags#statusline',
-            \   'currentfunction': 'CocCurrentFunction'
+            \   'currentfunction': 'CocCurrentFunction',
+            \   'gitbranch': 'FugitiveHead'
             \ },
             \ }
 
@@ -789,7 +791,43 @@ let g:fzf_colors =
 " [SECURITY RISK on shared systems]
 " uses osc52 escape sequence
 Plug 'fcpg/vim-osc52'
-command! YankToLocal call SendViaOSC52(getreg('"'))
+
+" == Startup screen ==
+Plug 'mhinz/vim-startify'
+let g:startify_change_to_dir = 0
+
+" == Fugitive (git manager) ==
+Plug 'tpope/vim-fugitive'
+
+" == Icons (nerdtree, lightline, startify)
+Plug 'ryanoasis/vim-devicons'
+if exists("g:loaded_webdevicons")
+  call webdevicons#refresh()
+endif
+
+" == More Text Objects ==
+" https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
+Plug 'wellle/targets.vim' 
+" extend argument to curlies
+autocmd User targets#mappings#user call targets#mappings#extend({
+            \ 'a': {'argument': [{'o': '[{([]', 'c': '[])}]', 's': ','}]},
+            \ })
+
+" == Smart substitute ==
+Plug 'tpope/vim-abolish'
+
+" == Show all registers ==
+Plug 'junegunn/vim-peekaboo'
+
+" == Markdown preview ==
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+" == Aligning (tabularize) ==
+Plug 'godlygeek/tabular'
+
+" == Table == replace this with tabular ??
+" enable only when needed
+" Plug 'dhruvasagar/vim-table-mode'
 
 " == CTRL P ==
 " CtrlP file search
