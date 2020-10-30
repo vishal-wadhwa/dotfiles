@@ -1,0 +1,79 @@
+# IMAGES
+# ls
+alias dim="docker images"
+alias dima="docker images -a"
+alias dimq="docker images -q --no-trunc"
+alias dimaq="docker images -a -q --no-trunc"
+alias dimd="docker images -a -q --no-trunc -f dangling=true"
+
+# rmi
+alias drmi="docker rmi"
+alias drmd='docker rmi $(dimd)'
+
+# NETWORK
+# ls
+alias dn="docker network"
+alias dnls="docker network ls"
+alias dngw="docker network inspect -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}'"
+alias dncip="docker network inspect -f '{{range \$id, \$ctr := .Containers}}{{\$id}} | {{\$ctr.IPv4Address}} - {{\$ctr.Name}}{{println}}{{end}}'"
+
+# CONTAINER
+alias dct="docker container"
+
+# ps
+alias dps="docker ps"
+alias dpsa="dps -a"
+
+# cp
+alias dcp="docker cp"
+
+# restart
+alias dre="docker restart "
+
+# attach
+alias dat="docker attach"
+alias dat!="docker attach --no-stdin"
+
+# inspect
+alias di="docker inspect -f"
+alias dip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+
+# prune
+alias dpr="docker container prune"
+
+# rm
+alias drm="docker rm"
+
+# stat
+alias dstat="docker stats"
+
+# start
+alias dst="docker start"
+alias dsta="docker start -a -i"
+
+# stop
+alias dstp="docker stop"
+# set -x
+# EXEC
+alias dx="docker exec"
+alias dxit="docker exec -it"
+alias dxd="docker exec -d"
+
+# LOGS
+alias dlo="docker logs --details -f"
+alias dlot="docker logs --details -f --tail"
+
+# SYSTEM
+alias duse="docker system df"
+
+#################################
+###### docker-compose ###########
+#################################
+
+# LOGS
+alias dclog="docker-compose logs -f"
+alias dclogt="docker-compose logs -f --tail"
+
+# ps
+alias dcps="docker-compose ps"
+alias dcpsa="docker-compose ps -a"

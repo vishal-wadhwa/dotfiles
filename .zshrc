@@ -155,9 +155,7 @@ alias umntz="diskutil unmount force $_WORKBOX_DEST_DIR"
 
 # zprof
 
-if [ -f ~/.docker_aliases.sh  ]; then
-    . ~/.docker_aliases.sh
-fi
+[ -f ~/.docker_alias ] && . ~/.docker_alias
 
 if [ -f ~/bin/zsh.command-not-found ]; then
     . ~/bin/zsh.command-not-found
