@@ -671,7 +671,7 @@ let g:go_def_mapping_enabled = 0
 " disable vim go docs
 let g:go_doc_keywordprg_enabled = 0
 " loc window bug with vim-go syntastic
-let g:go_list_type = "quickfix"
+" let g:go_list_type = "quickfix"
 
 " == SYNTASTIC ==
 Plug 'vim-syntastic/syntastic'
@@ -681,8 +681,8 @@ let g:syntastic_error_symbol = '✖'
 let g:syntastic_style_error_symbol = '✖'
 let g:syntastic_warning_symbol = '!'
 let g:syntastic_style_warning_symbol = '!'
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_enable_highlighting = 1
