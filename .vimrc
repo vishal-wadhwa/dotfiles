@@ -153,7 +153,10 @@ command! TrimWhitespace call TrimWhitespace()
 
 " shortcut
 noremap <leader>w :call TrimWhitespace()<cr>
-"
+
+" retain selection on indent/dedent
+vnoremap > >gv
+vnoremap < <gv
 
 " -------- STATUS LINE -----------
 " Always show the status line at the bottom, even if you only have one window open.
@@ -175,6 +178,9 @@ hi statusline guifg=black guibg=#8fbfdc ctermfg=black ctermbg=cyan
 " ---------- LINES ---------------
 " Show line numbers.
 set number
+
+" Show number of lines/bytes/matrix dims in visual modes
+set showcmd
 
 " This enables relative line numbering mode. With both number and
 " relativenumber enabled, the current line shows the true line number, while
@@ -272,6 +278,12 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" create new split to the right
+set splitright
+
+" create new split down below
+set splitbelow
 " -----------------------------------
 
 " --------- SEARCH ------------------
@@ -345,8 +357,10 @@ endif
 " Fill first match and then cycle with <Tab> and <S-Tab>
 set wildmode=longest:full,full
 
-" INSERT MODE COMPLETIONS
-" set complete-=i " dont give completions from included files
+" INSERT MODE COMPLETIONS - disable for speed
+" https://github.com/mhinz/vim-galore#faster-keyword-completion
+set complete-=i " disable scanning included files
+set complete-=t " disable searching tags
 
 " ----------------------------------
 
@@ -476,6 +490,7 @@ map <leader>f :Rg<space>
 " Plug 'jlanzarotta/bufexplorer'
 Plug 'fholgado/minibufexpl.vim'
 let g:miniBufExplMaxSize = 1
+let g:miniBufExplBRSplit = 0
 
 " == YCM (disabling in favour of coc.nvim) ==
 " Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --ts-completer' }
@@ -554,7 +569,7 @@ nmap <leader>rn <Plug>(coc-rename)
 xmap <leader>r  <Plug>(coc-format-selected)
 nmap <leader>r  <Plug>(coc-format-selected)
 
-augroup mygroup
+augroup cocgroup
     autocmd!
     " Setup formatexpr specified filetype(s).
     autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
@@ -597,7 +612,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Use auocmd to force lightline update.
+" Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " Mappings using CoCList:
