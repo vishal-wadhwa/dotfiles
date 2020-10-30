@@ -205,9 +205,11 @@ alias tmux="env TERM=screen-256color tmux"
 # TODO: write setup script and add to repo readme
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
-export LESS=-iR
+export LESS=-iRS
 [ -f ~/.less_termcap ] && . ~/.less_termcap
 
+# for delta diff pager
+export BAT_PAGER="less $LESS"
 
 # font test
 # echo -e 'Normal, \x1b[1mbold\x1b[22m, \x1b[3mitalic\x1b[23m, \x1b[1;3mbold italic\x1b[22;23m'
