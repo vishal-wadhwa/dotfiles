@@ -478,9 +478,9 @@ let g:AutoPairsWildClosedPair = ''
 
 " == Code commenting ==
 Plug 'tpope/vim-commentary'
-augroup vimcommentary_php
+augroup vimcommentary
     autocmd!
-    autocmd FileType php setlocal commentstring=//\ %s
+    autocmd FileType php,json,proto setlocal commentstring=//\ %s
 augroup END
 
 " == FZF == (giving this a try over ctrlp)
