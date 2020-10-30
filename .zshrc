@@ -127,9 +127,14 @@ zstyle :bracketed-paste-magic paste-finish pastefinish
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 
+# https://github.com/nvm-sh/nvm/issues/1277#issuecomment-536218082
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+# [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# load node without nvm
+export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/default)))/bin:$PATH"
+# works after running nvm twice
+alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" && [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" &&  nvm $@"
 
 
 export PATH="$PATH:$GOBIN"
