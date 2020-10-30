@@ -1,0 +1,15 @@
+# A screen-256color based TERMINFO that adds the escape sequences for italic.
+#
+# Install:
+#
+#   tic screen-256color.terminfo
+#
+# Usage:
+#
+#   export TERM=screen-256color
+#
+# https://gist.github.com/gutoyr/4192af1aced7a1b555df06bd3781a722
+
+screen-256color|screen256 with italic support,
+    ritm=\E[23m, sitm=\E[3m,
+    use=screen-256color,

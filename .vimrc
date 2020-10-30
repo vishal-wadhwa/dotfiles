@@ -48,10 +48,14 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 set background=dark
 set termguicolors
 
-"Sometimes setting 'termguicolors' is not enough and one has to set the t_8f and t_8b options explicitly
-":h xterm-true-color
+" Sometimes setting 'termguicolors' is not enough and one has to set the t_8f and t_8b options explicitly
+" :h xterm-true-color
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+" Italics Support - https://stackoverflow.com/questions/3494435/vimrc-make-comments-italic
+let &t_ZH="\e[3m"
+let &t_ZR="\e[23m"
 " -----------------------------------
 
 " ---------- VIEW/SYNTAX --------
@@ -742,6 +746,7 @@ set noshowmode
 Plug 'morhetz/gruvbox'
 " Customize fzf colors to match your color scheme
 " if get(g:, 'colors_name', 'default') == "gruvbox"
+let g:gruvbox_italic=1
 let g:fzf_colors =
             \ { 'fg':      ['fg', 'Normal'],
             \ 'bg':      ['bg', 'Normal'],

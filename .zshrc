@@ -151,7 +151,6 @@ alias sudo='sudo '
 alias mntz="sshfs $_WORKBOX_SRC_DIR $_WORKBOX_DEST_DIR -oauto_cache,reconnect,defer_permissions,noappledouble,cache=yes,kernel_cache,cache_timeout=3600" #compression=no -> may not be useful
 alias umntz="diskutil unmount force $_WORKBOX_DEST_DIR"
 
-# alias nvm="echo 'nvm has been disabled. Enable it in ~/.zshrc'"
 # zprof
 
 if [ -f ~/.docker_aliases.sh  ]; then
@@ -162,7 +161,6 @@ if [ -f ~/bin/zsh.command-not-found ]; then
     . ~/bin/zsh.command-not-found
 fi
 
-# export GO111MODULE=on
 
 alias myip='ifconfig en0 | grep inet'
 
@@ -176,8 +174,6 @@ alias grel="git tag --format '%(align:25,right)%(creatordate:local)%(end) | %(re
 
 eval $(thefuck --alias)
 
-# ulimit -n 200000 200000
-# ulimit -u 2048 2048
 alias tree="tree -C"
 
 unalias run-help 2>/dev/null
@@ -198,6 +194,9 @@ function ub64dec() {
 # mac proxy
 alias setpxy="networksetup -setwebproxystate wi-fi on; networksetup -setsecurewebproxystate wi-fi on"
 alias usetpxy="networksetup -setwebproxystate wi-fi off; networksetup -setsecurewebproxystate wi-fi off"
+
+alias tmux="env TERM=screen-256color tmux"
+
 
 # dotfiles setup
 # https://www.atlassian.com/git/tutorials/dotfiles
