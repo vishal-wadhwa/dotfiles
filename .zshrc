@@ -74,7 +74,7 @@ ZSH_THEME="random"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git colored-man-pages common-aliases zsh-autosuggestions you-should-use zsh-syntax-highlighting) #osx)
+plugins=(fzf git colored-man-pages common-aliases zsh-autosuggestions you-should-use zsh-syntax-highlighting) #osx)
 
 # typewritter theme vars
 export TYPEWRITTEN_CURSOR="block"
@@ -212,3 +212,5 @@ export LESS=-iR
 if [ $((RANDOM%10)) -eq 0 ]; then
    fortune | cowsay -f $(ls /usr/local/Cellar/cowsay/3.04/share/cows | shuf -n 1) | lolcat -a -f -t -s 5000 || true
 fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
