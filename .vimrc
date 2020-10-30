@@ -406,6 +406,11 @@ set backupdir^=$HOME/.vim/_backup//
 
 " fixes weird out of memory issues in large php files
 set maxmempattern=5000
+
+" better diff algo
+if has("patch-8.1.0360")
+    set diffopt+=algorithm:histogram
+endif
 " ----------------------------------
 
 " ---------- COMMAND LINE / EX MODE -
