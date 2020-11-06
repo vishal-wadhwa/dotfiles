@@ -116,6 +116,12 @@ syntax sync minlines=600
 noremap <F12> <Esc>:syntax sync fromstart<CR>
 inoremap <F12> <C-o>:syntax sync fromstart<CR>
 
+" set file type without overriding
+augroup detect_ft
+autocmd BufRead,BufNewFile Dockerfile.*,*.dockerfile setfiletype dockerfile
+augroup END
+
+
 " correct syntax highlight when using jsonc
 augroup jsonc_syntac
     autocmd!
