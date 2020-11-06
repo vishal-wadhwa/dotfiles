@@ -503,7 +503,7 @@ map <leader>f :Rg<space>
 
 " == BufExplorer ==
 " Plug 'jlanzarotta/bufexplorer'
-Plug 'fholgado/minibufexpl.vim'
+" Plug 'fholgado/minibufexpl.vim'
 let g:miniBufExplMaxSize = 1
 let g:miniBufExplBRSplit = 0
 
