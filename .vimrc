@@ -491,8 +491,9 @@ let g:AutoPairsWildClosedPair = ''
 Plug 'tpope/vim-commentary'
 augroup vimcommentary
     autocmd!
-    autocmd FileType php,json,proto setlocal commentstring=//\ %s
+    autocmd FileType cpp,c,php,json,proto setlocal commentstring=//\ %s
     autocmd FileType mysql setlocal commentstring=--\ %s
+    autocmd FileType vim setlocal commentstring=\"\ %s
 augroup END
 
 " == FZF == (giving this a try over ctrlp)
