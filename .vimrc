@@ -853,6 +853,12 @@ let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
 " == Terraform ==; more: https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
 
+" == fFtT;, on steroids
+Plug 'unblevable/quick-scope' 
+let g:qs_buftype_blacklist = ['terminal', 'nofile', 'startify']
+let g:qs_lazy_highlight = 1
+let g:qs_delay = 150 " 150ms
+
 " == Table == replace this with tabular ??
 " enable only when needed
 " Plug 'dhruvasagar/vim-table-mode'
