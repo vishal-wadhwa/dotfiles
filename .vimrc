@@ -837,6 +837,7 @@ Plug 'junegunn/vim-peekaboo'
 
 " == Markdown preview ==
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" let g:mkdp_filetypes = ['markdown', 'gitcommit']
 
 " == Aligning (tabularize) ==
 Plug 'godlygeek/tabular'
