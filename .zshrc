@@ -2,8 +2,8 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# private vars
-. ~/.private.env
+# private 
+[ -f ~/.private.shrc ] && . ~/.private.shrc
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
@@ -123,9 +123,15 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
+export EDITOR="vim"
 
 export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
+export GOBIN="$HOME/go/bin"
+# alias g1.12=$HOME/go
+alias go1.14=$HOME/code/goroots/go1.14/bin/go
+alias go2=$HOME/code/goroots/go2/bin/go
+alias go1.13=$HOME/code/goroots/go1.13/bin/go
+export PATH="$HOME/code/goroots/go1.13/bin:$PATH"
 
 # https://github.com/nvm-sh/nvm/issues/1277#issuecomment-536218082
 export NVM_DIR="$HOME/.nvm"
@@ -136,6 +142,7 @@ export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/$(
 # works after running nvm twice
 alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" && [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" &&  nvm $@"
 
+alias vi=vim
 
 export PATH="$PATH:$GOBIN"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -217,3 +224,4 @@ if [ $((RANDOM%15)) -eq 0 ]; then
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="/usr/local/opt/ruby/bin:$PATH"
