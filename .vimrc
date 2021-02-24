@@ -500,7 +500,8 @@ augroup END
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-" let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'top' } }
+let g:fzf_layout = { 'down': '~40%' }
+" let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.5, 'yoffset': 1, 'border': 'top' } }
 " let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.5, 'yoffset': 0, 'border': 'bottom' } }
 map <c-p> :GitFiles -c -o --exclude-standard<cr>
 map <f2> :FZF<cr>
