@@ -50,6 +50,7 @@
             "command": "shellcheck",
             "debounce": 1000,
             "args": [
+                "-x",
                 "--format",
                 "json",
                 "-"
