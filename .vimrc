@@ -850,6 +850,9 @@ let g:vdebug_options['ide_key'] = 'XDEBUG_IDE_KEY'
 let g:vdebug_options['debug_file_level'] = 2
 let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
 
+" == Terraform ==; more: https://github.com/hashivim/vim-terraform
+Plug 'hashivim/vim-terraform'
+
 " == Table == replace this with tabular ??
 " enable only when needed
 " Plug 'dhruvasagar/vim-table-mode'
