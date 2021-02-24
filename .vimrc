@@ -842,6 +842,14 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': 
 " == Aligning (tabularize) ==
 Plug 'godlygeek/tabular'
 
+" == Xdebug ==
+Plug 'vim-vdebug/vdebug'
+let g:vdebug_options = {}
+let g:vdebug_options['port'] = 9000
+let g:vdebug_options['ide_key'] = 'XDEBUG_IDE_KEY'
+let g:vdebug_options['debug_file_level'] = 2
+let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
+
 " == Table == replace this with tabular ??
 " enable only when needed
 " Plug 'dhruvasagar/vim-table-mode'
