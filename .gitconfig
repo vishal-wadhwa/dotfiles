@@ -1,0 +1,60 @@
+[user]
+    useConfigOnly = true
+
+[credential]
+	helper = cache
+
+[includeIf "gitdir:~/work/"]
+    path = ~/work/.gitconfig
+
+[core]
+    ; pager = $HOME/bin/diff-highlight | less
+    pager = delta
+    trustctime = false
+
+[color]
+    ui = auto
+
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+
+[color "diff"]
+    commit = green bold
+    meta = yellow
+    frag = cyan bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+
+[diff]
+    colorMoved = default
+
+[interactive]
+    ; diffFilter = diff-highlight
+    diffFilter = delta --color-only
+
+[commit]
+    template = ~/.gitmessage
+
+[delta]
+    features = line-numbers decorations
+    line-numbers = true
+    inspect-raw-lines = false # for colorMoved to work properly
+    syntax-theme = Dracula
+    plus-style = syntax "#003800"
+    minus-style = syntax "#3f0001"
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
+    hunk-header-decoration-style = cyan box ul
+
+[delta "line-numbers"]
+    line-numbers-left-style = cyan
+    line-numbers-right-style = cyan
+    line-numbers-minus-style = 124
+    line-numbers-plus-style = 28
