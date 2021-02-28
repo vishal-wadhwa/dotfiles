@@ -811,6 +811,21 @@ augroup vim_colors_xcode
     autocmd vim_colors_xcode ColorScheme * hi SpecialComment cterm=italic gui=italic
 augroup END
 
+" == git line change signs ==
+" Update Git signs every time the text is changed
+if has('nvim') || has('patch-8.0.902')
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
+let g:signify_sign_add    = '+'
+let g:signify_sign_change = '┃'
+let g:signify_sign_delete = '-'
+let g:signify_sign_show_count = 0 " Don’t show the number of deleted lines.
+" not working :/
+" autocmd User SignifySetup
+"             \ execute 'autocmd! signify' | autocmd signify TextChanged,TextChangedI * call sy#start()
+
 " == Remote Yank ==
 " [SECURITY RISK on shared systems]
 " uses osc52 escape sequence
