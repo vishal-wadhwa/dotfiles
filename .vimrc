@@ -909,6 +909,10 @@ colorscheme xcodedarkhc
 " colorscheme xcodelighthc
 " colorscheme xcodewwdc
 
+" coc extensions - after plug#end
+" clangd
+call coc#config('clangd.path', coc#util#extension_root().'/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd')
+
 " private vimrc
 try
     source ~/.private.vimrc
