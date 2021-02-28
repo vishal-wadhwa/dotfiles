@@ -756,7 +756,7 @@ let g:gutentags_cache_dir='~/.cache/vim/gutentags'
 Plug 'itchyny/lightline.vim'
 
 let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'darcula',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
@@ -803,6 +803,14 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 
+" == xcode like colors ==
+Plug 'arzg/vim-colors-xcode'
+augroup vim_colors_xcode
+    autocmd!
+    autocmd vim_colors_xcode ColorScheme * hi Comment        cterm=italic gui=italic
+    autocmd vim_colors_xcode ColorScheme * hi SpecialComment cterm=italic gui=italic
+augroup END
+
 " == Remote Yank ==
 " [SECURITY RISK on shared systems]
 " uses osc52 escape sequence
@@ -823,7 +831,7 @@ endif
 
 " == More Text Objects ==
 " https://github.com/wellle/targets.vim/blob/master/cheatsheet.md
-Plug 'wellle/targets.vim' 
+Plug 'wellle/targets.vim'
 " extend argument to curlies
 autocmd User targets#mappings#user call targets#mappings#extend({
             \ 'a': {'argument': [{'o': '[{([]', 'c': '[])}]', 's': ','}]},
@@ -854,7 +862,7 @@ let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
 Plug 'hashivim/vim-terraform'
 
 " == fFtT;, on steroids
-Plug 'unblevable/quick-scope' 
+Plug 'unblevable/quick-scope'
 let g:qs_buftype_blacklist = ['terminal', 'nofile', 'startify']
 let g:qs_lazy_highlight = 1
 let g:qs_delay = 150 " 150ms
@@ -876,7 +884,15 @@ let g:qs_delay = 150 " 150ms
 call plug#end()
 " -----------------------------------
 
-colorscheme gruvbox
+" gruvbox
+" colorscheme gruvbox
+
+" xcode
+" colorscheme xcodedark
+colorscheme xcodedarkhc
+" colorscheme xcodelight
+" colorscheme xcodelighthc
+" colorscheme xcodewwdc
 
 " private vimrc
 try
