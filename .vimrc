@@ -523,6 +523,7 @@ let g:ycm_filetype_blacklist = { 'go': 1, 'git': 1,  'notes': 1, 'diff': 1,
 
 " == coc.nvim completions ==
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Install extensions scripts: npm install --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
 
 " limit suggestions to 10
 set pumheight=10

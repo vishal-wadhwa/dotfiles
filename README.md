@@ -12,3 +12,5 @@ development. I'll keep updating them over time.
 ### iterm2 (Dynamic Profiles)
 iterm2 config requires that the path is set explicitly in General > Preferences.
 
+### coc plugin installation
+Install extensions scripts: `npm install --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod`
