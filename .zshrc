@@ -217,7 +217,7 @@ export BAT_PAGER="less $LESS"
 # echo -e 'Normal, \x1b[1mbold\x1b[22m, \x1b[3mitalic\x1b[23m, \x1b[1;3mbold italic\x1b[22;23m'
 
 if [ $((RANDOM%15)) -eq 0 ]; then
-    fortune | cowsay -f $(ls /usr/local/Cellar/cowsay/3.04/share/cows | shuf -n 1) | lolcat -a -f -t -s 5000 || true
+    fortune | cowsay -f $(cowsay -l | tail -n +2 | tr ' ' '\n' | shuf -n 1) | lolcat -a -f -t -s 5000 || true
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
