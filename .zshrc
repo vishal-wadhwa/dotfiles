@@ -216,9 +216,11 @@ export BAT_PAGER="less $LESS"
 # font test
 # echo -e 'Normal, \x1b[1mbold\x1b[22m, \x1b[3mitalic\x1b[23m, \x1b[1;3mbold italic\x1b[22;23m'
 
+# fixes error: Inappropriate ioctl for device gpg: problem with the agent
+export GPG_TTY=$(tty)
+
 if [ $((RANDOM%15)) -eq 0 ]; then
     fortune | cowsay -f $(cowsay -l | tail -n +2 | tr ' ' '\n' | shuf -n 1) | lolcat -a -f -t -s 5000 || true
 fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/usr/local/opt/ruby/bin:$PATH"
