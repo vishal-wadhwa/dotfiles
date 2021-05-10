@@ -402,11 +402,12 @@ set mouse+=a
 " Unbind some useless/annoying default key bindings.
 nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
 
-" TODO: add non existing dir handling
 " swap files at central place. needs dir to exist. // means full path
+silent !mkdir -p ~/.vim/_swap
 set directory^=$HOME/.vim/_swap//
 
 " file backups at central place
+silent !mkdir -p ~/.vim/_backup
 set backup
 set backupdir^=$HOME/.vim/_backup//
 
