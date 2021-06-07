@@ -2,16 +2,29 @@
     "languageserver": {
         "go": {
             "command": "gopls",
-            "args": ["-remote=auto"],
-            "rootPatterns": ["go.mod", ".git", "Gopkg.toml", "main.go"],
-            "filetypes": ["go"],
-            "trace.server":"verbose"
+            "args": [
+                "-remote=auto"
+            ],
+            "rootPatterns": [
+                "go.mod",
+                ".git",
+                "Gopkg.toml",
+                "main.go"
+            ],
+            "filetypes": [
+                "go"
+            ],
+            "trace.server": "verbose"
         },
         "intelephense": {
             "command": "intelephense",
-            "args": ["--stdio"],
-            "filetypes": ["php"],
-            "trace.server":"verbose",
+            "args": [
+                "--stdio"
+            ],
+            "filetypes": [
+                "php"
+            ],
+            "trace.server": "verbose",
             "settings": {
                 "intelephense": {
                     "environment.phpVersion": "7.2.0",
@@ -23,20 +36,31 @@
             }
         }
     },
-    "coc.preferences.hoverTarget":"float",
+    // "coc.preferences.hoverTarget":"float",
     "diagnostic-languageserver.linters": {
         "phpcs": {
             "command": "phpcs",
             "sourceName": "phpcs",
             "debounce": 1000,
-            "args": ["--report=csv", "-q", "-d", "memory_limit=512M", "%file"],
+            "args": [
+                "--report=csv",
+                "-q",
+                "-d",
+                "memory_limit=512M",
+                "%file"
+            ],
             "formatLines": 1,
             "formatPattern": [
                 "^.+,(\\d+),(\\d+),(\\S+),\"(.+)\",.+,\\d+,(\\d)$",
                 {
                     "line": 1,
                     "column": 2,
-                    "message": [4, "\nAutoFix(", 5, ")"],
+                    "message": [
+                        4,
+                        "\nAutoFix(",
+                        5,
+                        ")"
+                    ],
                     "security": 3
                 }
             ],
@@ -74,7 +98,9 @@
             "sourceName": "golint",
             "command": "golint",
             "debounce": 1000,
-            "args": ["%file"],
+            "args": [
+                "%file"
+            ],
             "formatLines": 1,
             "formatPattern": [
                 "^.+:(\\d+):(\\d+): (.+)()$",
@@ -93,7 +119,10 @@
             "sourceName": "govet",
             "command": "go",
             "debounce": 1000,
-            "args": ["vet", "./..."],
+            "args": [
+                "vet",
+                "./..."
+            ],
             "isStderr": true,
             "isStdout": false,
             "formatLines": 1,
@@ -114,7 +143,11 @@
             "sourceName": "revive",
             "command": "revive",
             "debounce": 2000,
-            "args": ["--formatter", "json", "%file"],
+            "args": [
+                "--formatter",
+                "json",
+                "%file"
+            ],
             "parseJson": {
                 "line": "Position.Start.Line",
                 "column": "Position.Start.Column",
@@ -129,10 +162,27 @@
             }
         }
     },
-    "diagnostic-languageserver.filetypes":{
+    "diagnostic-languageserver.filetypes": {
         "php": "phpcs",
         "sh": "shellcheck",
-        "go": ["revive"]
+        "go": [
+            "revive"
+        ]
     },
-    "diagnostic-languageserver.trace.server": "messages"
+    "diagnostic-languageserver.trace.server": "messages",
+    "json.schemas": [
+        {
+            "fileMatch": [
+                ".vimspector.json"
+            ],
+            "url": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json"
+        },
+        {
+            "fileMatch": [
+                ".gadgets.json",
+                ".gadgets.d/*.json"
+            ],
+            "url": "https://puremourning.github.io/vimspector/schema/gadgets.schema.json"
+        }
+    ]
 }
