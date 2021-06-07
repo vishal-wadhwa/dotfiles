@@ -11,13 +11,13 @@ set nocompatible
 " 256 color terminal
 set t_Co=256
 
-" Disable the default Vim startup message.
+" Disable the default Vim start-up message.
 set shortmess+=I
 
 " Set leader to space as easily accessible from both hands
 let mapleader=" "
 
-" The backspace key has slightly unintuitive behavior by default. For example,
+" The backspace key has slightly unintuitive behaviour by default. For example,
 " by default, you can't backspace before the insertion point set with 'i'.
 " This configuration makes backspace behave more reasonably, in that you can
 " backspace over anything.
@@ -44,7 +44,7 @@ inoremap <Down>  <ESC>:echoe "Use j"<CR>
 " -------------------------------
 
 " --------- THEME (keep above others)
-" colorscheme delek
+" color scheme delek
 set background=dark
 set termguicolors
 
@@ -371,7 +371,11 @@ set complete-=t " disable searching tags
 " ----------------------------------
 
 " - SPELL CHECK (needs config improvement) ------------
-setl spell spelllang=en_us
+set spell spelllang=en_gb,cjk
+set spelloptions=camel " support camelCase
+
+" toggle spell check
+nmap <silent> <leader>s :setl spell!<cr> 
 
 " change spell check highlight to underline
 hi clear SpellBad
@@ -381,7 +385,7 @@ hi SpellCap cterm=underline ctermfg=Blue
 hi clear SpellRare
 hi SpellRare cterm=underline ctermfg=Magenta
 
-setl nospell " disabling for now
+set nospell " disabling for now - enable when required
 " ----------------------------------------------------
 
 " -------------- MACROS -----------
