@@ -695,6 +695,7 @@ let g:go_def_mapping_enabled = 0
 let g:go_doc_keywordprg_enabled = 0
 " loc window bug with vim-go syntastic
 " let g:go_list_type = "quickfix"
+let g:go_debug_address = '127.0.0.1:40000'
 
 " == SYNTASTIC ==
 Plug 'vim-syntastic/syntastic'
