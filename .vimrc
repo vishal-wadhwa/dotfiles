@@ -845,6 +845,9 @@ let g:startify_change_to_dir = 0
 " == Fugitive (git manager) ==
 Plug 'tpope/vim-fugitive'
 
+" == GBrowse support for GitHub in fugitive.vim
+Plug 'tpope/vim-rhubarb'
+
 " == Icons (nerdtree, lightline, startify)
 Plug 'ryanoasis/vim-devicons'
 if exists("g:loaded_webdevicons")
