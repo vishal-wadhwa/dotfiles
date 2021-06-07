@@ -892,9 +892,8 @@ let g:qs_buftype_blacklist = ['terminal', 'nofile', 'startify']
 let g:qs_lazy_highlight = 1
 let g:qs_delay = 150 " 150ms
 
-" == Table == replace this with tabular ??
-" enable only when needed
-" Plug 'dhruvasagar/vim-table-mode'
+" == Split and Join lines
+Plug 'AndrewRadev/splitjoin.vim'
 
 " == CTRL P ==
 " CtrlP file search
