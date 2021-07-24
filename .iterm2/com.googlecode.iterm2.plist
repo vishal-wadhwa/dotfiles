@@ -6,6 +6,8 @@
 	<false/>
 	<key>AllowClipboardAccess</key>
 	<true/>
+	<key>AllowInteractiveSwipeBetweenTabs</key>
+	<false/>
 	<key>AlternateMouseScroll</key>
 	<true/>
 	<key>CopySelection</key>
