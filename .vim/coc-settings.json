@@ -184,5 +184,9 @@
             ],
             "url": "https://puremourning.github.io/vimspector/schema/gadgets.schema.json"
         }
-    ]
+    ],
+    "yaml.format.enable": true,
+    "yaml.schemaStore.enable": true,
+    "yaml.format.singleQuote": true,
+    "yaml.format.proseWrap": "always"
 }
