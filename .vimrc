@@ -512,6 +512,14 @@ map <c-p> :GitFiles -c -o --exclude-standard<cr>
 map <f2> :FZF<cr>
 map <leader>p :Buffers<cr>
 map <leader>f :Rg<space>
+" Visual mode mappings
+command! -bar -bang XMaps call fzf#vim#maps("x", <bang>0)
+
+" Insert mode mappings
+command! -bar -bang IMaps call fzf#vim#maps("i", <bang>0)
+
+" Operator-pending mappings: https://learnvimscriptthehardway.stevelosh.com/chapters/15.html
+command! -bar -bang OMaps call fzf#vim#maps("o", <bang>0)
 
 " == BufExplorer ==
 " Plug 'jlanzarotta/bufexplorer'
