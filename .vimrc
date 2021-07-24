@@ -307,6 +307,32 @@ set magic " on by default
 
 " Show search count
 set shortmess-=S
+
+" Complex selected expression search in visual mode
+" Extended from here:
+" https://github.com/bronson/vim-visual-star-search/blob/7c32edb9e3c85d473d9be4dec721a4c9d5d4d69c/plugin/visual-star-search.vim
+function! VisualStarSearch(cmdtype,...)
+    let temp = (has('clipboard') ? @+ : @" )
+    normal! gvy
+
+    if !a:0 || a:1 != 'raw'
+    let @" = escape(@", a:cmdtype.'\*')
+    endif
+    let @/ = substitute(@", '\n', '\\n', 'g')
+    let @/ = substitute(@/, '\[', '\\[', 'g')
+    let @/ = substitute(@/, '\~', '\\~', 'g')
+    let @/ = substitute(@/, '\.', '\\.', 'g')
+
+    if has('clipboard')
+      let @+ = temp
+    endif
+    let @" = temp " Since, unnamed and + are always in sync, so copying to both 
+endfunction
+
+" replace vim's built-in visual * and # behavior
+" gn and gN restart visual mode
+xnoremap * :<C-u>call VisualStarSearch('/')<CR>/<C-R>=@/<CR><CR>gn
+xnoremap # :<C-u>call VisualStarSearch('?')<CR>?<C-R>=@/<CR><CR>gN
 " -----------------------------------
 
 " --------- CLIPBOARD ---------------
@@ -428,6 +454,7 @@ endif
 " history num
 set history=1000
 " ----------------------------------
+
 " ----- PLUGIN MANAGER --------------
 " VimPlug install (place it before plugin#begin())
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -902,16 +929,6 @@ let g:qs_delay = 150 " 150ms
 
 " == Split and Join lines
 Plug 'AndrewRadev/splitjoin.vim'
-
-" == * and # search in visual mode ==
-Plug 'bronson/vim-visual-star-search'
-" It's usage is a bit weird. Instead of repeatedly pressing *, you need to
-" press n. That is, do */# once and then use n/N.
-"
-" These mappings are not required as it is can be accomplished using fzf.
-" If required, make it use Rg
-" nnoremap <leader>* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
-" vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
 
 " == CTRL P ==
 " CtrlP file search
