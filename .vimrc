@@ -903,6 +903,16 @@ let g:qs_delay = 150 " 150ms
 " == Split and Join lines
 Plug 'AndrewRadev/splitjoin.vim'
 
+" == * and # search in visual mode ==
+Plug 'bronson/vim-visual-star-search'
+" It's usage is a bit weird. Instead of repeatedly pressing *, you need to
+" press n. That is, do */# once and then use n/N.
+"
+" These mappings are not required as it is can be accomplished using fzf.
+" If required, make it use Rg
+" nnoremap <leader>* :call ag#Ag('grep', '--literal ' . shellescape(expand("<cword>")))<CR>
+" vnoremap <leader>* :<C-u>call VisualStarSearchSet('/', 'raw')<CR>:call ag#Ag('grep', '--literal ' . shellescape(@/))<CR>
+
 " == CTRL P ==
 " CtrlP file search
 " let g:ctrlp_lazy_update = 0
