@@ -34,6 +34,25 @@
             "initializationOptions": {
                 "storagePath": "/tmp/.vim/intelephense"
             }
+        },
+        "golangci-lint-languageserver": {
+            "command": "golangci-lint-langserver",
+            "args": [
+                "-debug"
+            ],
+            "filetypes": [
+                "go"
+            ],
+            "initializationOptions": {
+                "command": [
+                    "golangci-lint",
+                    "--config",
+                    "~/work/linter-configs/golang-ci-lint/golangci.yml",
+                    "run",
+                    "--out-format",
+                    "json"
+                ]
+            }
         }
     },
     // "coc.preferences.hoverTarget":"float",
@@ -166,7 +185,7 @@
         "php": "phpcs",
         "sh": "shellcheck",
         "go": [
-            "revive"
+            // "revive"
         ]
     },
     "diagnostic-languageserver.trace.server": "messages",
