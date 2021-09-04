@@ -400,9 +400,6 @@ set complete-=t " disable searching tags
 set spell spelllang=en_gb,cjk
 set spelloptions=camel " support camelCase
 
-" toggle spell check
-nmap <silent> <leader>s :setl spell!<cr> 
-
 " change spell check highlight to underline
 hi clear SpellBad
 hi SpellBad cterm=underline ctermfg=Red
