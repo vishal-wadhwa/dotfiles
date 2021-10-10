@@ -857,6 +857,7 @@ if has('nvim') || has('patch-8.0.902')
 else
   Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
 endif
+" let g:signify_disable_by_default = 0
 let g:signify_sign_add    = '+'
 let g:signify_sign_change = '┃'
 let g:signify_sign_delete = '-'
@@ -945,10 +946,10 @@ call plug#end()
 
 " xcode
 " colorscheme xcodedark
-colorscheme xcodedarkhc
+" colorscheme xcodedarkhc
 " colorscheme xcodelight
 " colorscheme xcodelighthc
-" colorscheme xcodewwdc
+colorscheme xcodewwdc
 
 " coc extensions - after plug#end
 " clangd

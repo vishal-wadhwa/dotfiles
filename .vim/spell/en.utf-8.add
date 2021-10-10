@@ -34,3 +34,6 @@ color
 bool
 mutex
 Solr
+ansible
+json
+timestamp
