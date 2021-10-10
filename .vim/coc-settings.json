@@ -46,8 +46,8 @@
             "initializationOptions": {
                 "command": [
                     "golangci-lint",
-                    "--config",
-                    "~/work/linter-configs/golang-ci-lint/golangci.yml",
+                    // "--config",
+                    // "~/work/linter-configs/golang-ci-lint/golangci.yml",
                     "run",
                     "--out-format",
                     "json"
