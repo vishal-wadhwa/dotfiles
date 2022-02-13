@@ -142,7 +142,7 @@ export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/$(
 # works after running nvm twice
 alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" && [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" &&  nvm $@"
 
-alias vi=vim
+alias vi=nvim
 
 export PATH="$PATH:$GOBIN"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
