@@ -227,3 +227,5 @@ fi
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+alias kcat='docker run --rm -i --network=host edenhill/kcat:1.7.0'
