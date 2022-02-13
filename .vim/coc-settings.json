@@ -207,5 +207,6 @@
     "yaml.format.enable": true,
     "yaml.schemaStore.enable": true,
     "yaml.format.singleQuote": true,
-    "yaml.format.proseWrap": "always"
+    "yaml.format.proseWrap": "always",
+    "clangd.arguments":["-Wall", "-Wextra", "-Wpedantic", "-std=c++14"]
 }
