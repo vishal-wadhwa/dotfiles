@@ -695,19 +695,26 @@ nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
 
 " == Vim Go ==
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-" let g:go_highlight_structs = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_functions = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_build_constraints = 1
-" let g:go_highlight_function_calls = 1
-" let g:go_highlight_extra_types = 1
-" let g:go_highlight_function_parameters = 1
-" let g:go_highlight_types = 1
-" let g:go_highlight_fields = 1
-" let g:go_highlight_generate_tags = 1
-" let g:go_highlight_variable_declarations = 1
-" let g:go_highlight_variable_assignments = 1
+
+" Test and see if there are any perf issue in syntax highlighting
+" in nvim too?
+if !has('nvim')
+    " use treesitter
+    " let g:go_highlight_structs = 1
+    " let g:go_highlight_methods = 1
+    " let g:go_highlight_functions = 1
+    " let g:go_highlight_operators = 1
+    " let g:go_highlight_build_constraints = 1
+    " let g:go_highlight_function_calls = 1
+    " let g:go_highlight_extra_types = 1
+    " let g:go_highlight_function_parameters = 1
+    " let g:go_highlight_types = 1
+    " let g:go_highlight_fields = 1
+    " let g:go_highlight_generate_tags = 1
+    " let g:go_highlight_variable_declarations = 1
+    " let g:go_highlight_variable_assignments = 1
+endif
+
 " show type info for word under cursor
 let g:go_auto_type_info = 1
 " goimports on save
@@ -937,6 +944,11 @@ Plug 'AndrewRadev/splitjoin.vim'
 " let g:ctrlp_max_files=0
 " let g:ctrlp_max_depth=40
 " let g:ctrlp_show_hidden = 1
+
+if has('nvim')
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    " https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
+endif
 
 call plug#end()
 " -----------------------------------
