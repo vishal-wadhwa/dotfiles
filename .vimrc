@@ -520,7 +520,7 @@ let g:AutoPairsWildClosedPair = ''
 Plug 'tpope/vim-commentary'
 augroup vimcommentary
     autocmd!
-    autocmd FileType cpp,c,php,json,proto setlocal commentstring=//\ %s
+    autocmd FileType cpp,c,php,json,proto,jsonc setlocal commentstring=//\ %s
     autocmd FileType mysql setlocal commentstring=--\ %s
     autocmd FileType vim setlocal commentstring=\"\ %s
 augroup END
