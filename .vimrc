@@ -926,6 +926,9 @@ let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
 " == Terraform ==; more: https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
 
+" == jsonnet filetype highlight
+Plug 'google/vim-jsonnet'
+
 " == fFtT;, on steroids
 Plug 'unblevable/quick-scope'
 let g:qs_buftype_blacklist = ['terminal', 'nofile', 'startify']
