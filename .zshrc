@@ -225,3 +225,8 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 alias kcat='docker run --rm -i --network=host edenhill/kcat:1.7.0'
+
+function watchpr() {
+    gh pr checks $1 --watch
+    osascript -e "display notification \"Checks completed for PR $1\""
+}
