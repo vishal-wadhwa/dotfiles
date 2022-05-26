@@ -1,5 +1,17 @@
 {
     "languageserver": {
+        "terraform": {
+            "command": "terraform-ls",
+            "args": [
+                "serve"
+            ],
+            "filetypes": [
+                "terraform",
+                "tf"
+            ],
+            "initializationOptions": {},
+            "settings": {}
+        },
         "go": {
             "command": "gopls",
             "args": [
@@ -208,5 +220,10 @@
     "yaml.schemaStore.enable": true,
     "yaml.format.singleQuote": true,
     "yaml.format.proseWrap": "always",
-    "clangd.arguments":["-Wall", "-Wextra", "-Wpedantic", "-std=c++14"]
+    "clangd.arguments": [
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-std=c++14"
+    ]
 }
