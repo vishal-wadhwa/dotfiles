@@ -2,8 +2,7 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# private 
-[ -f ~/.private.shrc ] && . ~/.private.shrc
+[ -f ~/work/.shrc ] && . ~/work/.shrc
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
@@ -155,9 +154,6 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 export YSU_MESSAGE_POSITION="after"
 
 alias sudo='sudo '
-
-alias mntz="sshfs $_WORKBOX_SRC_DIR $_WORKBOX_DEST_DIR -oauto_cache,reconnect,defer_permissions,noappledouble,cache=yes,kernel_cache,cache_timeout=3600" #compression=no -> may not be useful
-alias umntz="diskutil unmount force $_WORKBOX_DEST_DIR"
 
 # zprof
 
