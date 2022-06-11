@@ -232,9 +232,8 @@ function watchpr() {
 }
 
 function setup_python() {
-    command -v pyenv >/dev/null && eval "$(pyenv init -)"
+    command -v pyenv >/dev/null && (eval "$(pyenv init -)"; pyenv virtualenvwrapper_lazy)
     export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
-    pyenv virtualenvwrapper_lazy
 }
 setup_python
 
