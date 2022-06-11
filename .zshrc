@@ -73,7 +73,7 @@ ZSH_THEME="mortalscumbag"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf git colored-man-pages common-aliases zsh-autosuggestions you-should-use zsh-syntax-highlighting) #osx)
+plugins=(kubectl fzf git colored-man-pages common-aliases zsh-autosuggestions you-should-use zsh-syntax-highlighting) #osx)
 
 # typewritter theme vars
 export TYPEWRITTEN_CURSOR="block"
@@ -237,3 +237,16 @@ function setup_python() {
     pyenv virtualenvwrapper_lazy
 }
 setup_python
+
+function kube-merge() {
+    if [ -d ~/.kube  ]; then
+        files=
+        # add all configs to kubeconfig variable
+        for file in ~/.kube/*-config; do
+            files="$files:$file"
+        done
+        files="${files#:}" # remove extra prefix colon
+        cp ~/.kube/config ~/.kube/config.bkp
+        KUBECONFIG=$files kubectl config view --flatten > ~/.kube/config
+    fi
+}
