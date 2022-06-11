@@ -230,3 +230,10 @@ function watchpr() {
     gh pr checks $1 --watch
     osascript -e "display notification \"Checks completed for PR $1\""
 }
+
+function setup_python() {
+    command -v pyenv >/dev/null && eval "$(pyenv init -)"
+    export PYENV_VIRTUALENVWRAPPER_PREFER_PYVENV="true"
+    pyenv virtualenvwrapper_lazy
+}
+setup_python

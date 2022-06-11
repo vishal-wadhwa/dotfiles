@@ -461,6 +461,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 " ------------------------------------
 
+" ------------ PATHS -----------------
+" Read :h python-virtualenv
+" https://github.com/neovim/pynvim/issues/16#issuecomment-152417012
+let g:python3_host_prog = '/usr/local/bin/python3'
+" ------------------------------------
+
 
 " ---------- PLUGIN CONFIG ---------
 call plug#begin('~/.vim/plugged')
@@ -952,6 +958,24 @@ if has('nvim')
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     " https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
 endif
+
+" == Python requirements.txt syntax plugin
+Plug 'raimon49/requirements.txt.vim'
+
+" == jinja syntax
+Plug 'Glench/Vim-Jinja2-Syntax'
+
+" == ansible syntax
+Plug 'pearofducks/ansible-vim'
+
+" vim debugger with DAP
+Plug 'puremourning/vimspector'
+let g:vimspector_enable_mappings='HUMAN'
+let g:vimspector_install_gadgets = [ 'debugpy' ]
+let g:vimspector_base_dir = expand( '$HOME/.config/vimspector' )
+
+" TODO - to be tried later
+" https://github.com/nvim-telescope/telescope.nvim
 
 call plug#end()
 " -----------------------------------
