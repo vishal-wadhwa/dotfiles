@@ -129,7 +129,7 @@ export GOBIN="$HOME/go/bin"
 # alias g1.12=$HOME/go
 alias go1.14=$HOME/code/goroots/go1.14/bin/go
 alias go2=$HOME/code/goroots/go2/bin/go
-alias go1.13=$HOME/code/goroots/go1.13/bin/go
+alias go1.16=$HOME/code/goroots/go1.16/bin/go
 export PATH="$HOME/code/goroots/go1.13/bin:$PATH"
 
 # https://github.com/nvm-sh/nvm/issues/1277#issuecomment-536218082
