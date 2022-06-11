@@ -962,6 +962,9 @@ endif
 " == Python requirements.txt syntax plugin
 Plug 'raimon49/requirements.txt.vim'
 
+" == k8s helm chart syntax
+Plug 'towolf/vim-helm'
+
 " == jinja syntax
 Plug 'Glench/Vim-Jinja2-Syntax'
 
