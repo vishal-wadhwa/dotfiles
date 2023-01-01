@@ -5,7 +5,7 @@
 [ -f ~/work/.shrc ] && . ~/work/.shrc
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/$USER/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -26,14 +26,13 @@ ZSH_THEME="mortalscumbag"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -48,9 +47,10 @@ ZSH_THEME="mortalscumbag"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
+# You can also set it to another string to have that shown instead of the default red dots.
+# e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
+# Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -122,6 +122,9 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
+is_mac=$(! [[ $(uname -s) == 'Darwin' ]]; echo $?) # use inverted condition to store 1 for truthy
+is_arm=$(! [[ $(uname -p) == 'arm' ]]; echo $?)
+
 export EDITOR="vim"
 
 export GOPATH="$HOME/go"
@@ -139,7 +142,11 @@ export NVM_DIR="$HOME/.nvm"
 # load node without nvm
 export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/default)))/bin:$PATH"
 # works after running nvm twice
-alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh" && [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm" &&  nvm $@"
+if  [ $is_mac ] && [ $is_arm ]; then
+    alias nvm="unalias nvm; [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"; [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm";  nvm $@"
+else
+    alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"; [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm";  nvm $@"
+fi
 
 alias vi=nvim
 
@@ -251,3 +258,8 @@ function kube-merge() {
     fi
 }
 # export KUBECONFIG=$HOME/.kube/config
+
+# Set PATH, MANPATH, etc., for Homebrew.
+if  [ $is_mac ] && [ $is_arm ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
