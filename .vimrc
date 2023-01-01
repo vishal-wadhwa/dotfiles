@@ -978,6 +978,12 @@ let g:vimspector_enable_mappings='HUMAN'
 let g:vimspector_install_gadgets = [ 'debugpy' ]
 let g:vimspector_base_dir = expand( '$HOME/.config/vimspector' )
 
+" csv plugin
+Plug 'chrisbra/csv.vim'
+
+" GitHub codeowners
+Plug 'rhysd/vim-syntax-codeowners'
+
 " TODO - to be tried later
 " https://github.com/nvim-telescope/telescope.nvim
 
