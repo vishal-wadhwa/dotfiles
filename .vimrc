@@ -309,6 +309,15 @@ set magic " on by default
 " Show search count
 set shortmess-=S
 
+" https://vim.fandom.com/wiki/Copy_search_matches
+function! CopyMatches(reg)
+  let hits = []
+  %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+  let reg = empty(a:reg) ? '+' : a:reg
+  execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
+
 " Complex selected expression search in visual mode
 " Extended from here:
 " https://github.com/bronson/vim-visual-star-search/blob/7c32edb9e3c85d473d9be4dec721a4c9d5d4d69c/plugin/visual-star-search.vim
