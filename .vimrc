@@ -64,6 +64,7 @@ syntax on
 
 " Enable filetype detection its plugins and indentation
 filetype plugin indent on
+au BufNewFile,BufRead *Jenkinsfile* setf groovy
 
 " Show matching brackets when text indicator is over them
 set showmatch
