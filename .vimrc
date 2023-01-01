@@ -477,7 +477,7 @@ endif
 " https://github.com/neovim/pynvim/issues/16#issuecomment-152417012
 " https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
 " Figure out the system Python for Neovim.
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = $HOME.'/.pyenv/shims/python3'
 " ------------------------------------
 
 
