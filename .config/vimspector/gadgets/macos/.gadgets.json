@@ -1,0 +1,19 @@
+{
+  "adapters": {
+    "debugpy": {
+      "command": [
+        "/usr/local/opt/python@3.9/bin/python3.9",
+        "${gadgetDir}/debugpy/build/lib/debugpy/adapter"
+      ],
+      "configuration": {
+        "python": "/usr/local/opt/python@3.9/bin/python3.9",
+        "subProcess": false
+      },
+      "name": "debugpy"
+    },
+    "multi-session": {
+      "host": "${host}",
+      "port": "${port}"
+    }
+  }
+}
