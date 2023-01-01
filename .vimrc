@@ -332,6 +332,7 @@ function! VisualStarSearch(cmdtype,...)
     let @/ = substitute(@/, '\[', '\\[', 'g')
     let @/ = substitute(@/, '\~', '\\~', 'g')
     let @/ = substitute(@/, '\.', '\\.', 'g')
+    let @/ = '\<'.@/.'\>'
 
     if has('clipboard')
       let @+ = temp
