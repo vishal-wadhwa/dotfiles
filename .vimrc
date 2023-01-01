@@ -840,7 +840,7 @@ let g:lightline = {
             \ 'colorscheme': 'darcula',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+            \             [ 'gitbranch', 'cocstatus', 'currentfunction', 'readonly', 'relativepath', 'modified' ] ],
             \   'right': [ [ 'lineinfo' ],
             \              [ 'percent' ],
             \              [ 'fileformat', 'fileencoding', 'filetype' ],
@@ -1022,11 +1022,11 @@ call plug#end()
 " colorscheme gruvbox
 
 " xcode
-" colorscheme xcodedark
+colorscheme xcodedark
 " colorscheme xcodedarkhc
 " colorscheme xcodelight
 " colorscheme xcodelighthc
-colorscheme xcodewwdc
+" colorscheme xcodewwdc
 
 " coc extensions - after plug#end
 " clangd
