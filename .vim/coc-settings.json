@@ -221,13 +221,28 @@
     "yaml.format.singleQuote": true,
     "yaml.format.proseWrap": "always",
     "yaml.completion": true,
-    "yaml.schemas":{
-        "kubernetes": ["kube*/*.yml", "kube*/*.yaml", "kube*/*/*.yml", "kube*/*/*.yaml"]
+    "yaml.schemas": {
+        "kubernetes": [
+            "kube*/*.yml",
+            "kube*/*.yaml",
+            "kube*/*/*.yml",
+            "kube*/*/*.yaml",
+            "*service-manifests*.yaml"
+        ]
     },
     "clangd.arguments": [
         "-Wall",
         "-Wextra",
         "-Wpedantic",
         "-std=c++14"
-    ]
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "pyright.organizeimports.provider": "isort",
+    "python.analysis.diagnosticMode":"workspace",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "python"
+    ],
+    "suggest.noselect": false,
+    "suggest.enablePreselect": true
 }
