@@ -129,10 +129,7 @@ export EDITOR="vim"
 
 export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
-# alias g1.12=$HOME/go
-alias go1.14=$HOME/code/goroots/go1.14/bin/go
 alias go2=$HOME/code/goroots/go2/bin/go
-alias go1.16=$HOME/sdk/go1.16/bin/go
 export PATH="$HOME/code/goroots/go1.13/bin:$PATH"
 
 # https://github.com/nvm-sh/nvm/issues/1277#issuecomment-536218082
@@ -245,6 +242,10 @@ function setup_python() {
 }
 setup_python
 
+# Magic to get pyenv 3.8.7 work on M1
+# [0] % curl -sSL 'https://raw.githubusercontent.com/Homebrew/formula-patches/master/python/3.8.7.patch' > 3.8.7.patch
+# [0] % cat /opt/homebrew/Cellar/pyenv/2.3.9/plugins/python-build/share/python-build/patches/3.8.7/Python-3.8.7/0001-bpo-45405-Prevent-internal-configure-error-when-runn.patch 3.8.7.patch | pyenv install --patch 3.8.7
+
 function kube-merge() {
     if [ -d ~/.kube  ]; then
         files=
@@ -257,9 +258,12 @@ function kube-merge() {
         KUBECONFIG=$files kubectl config view --flatten > ~/.kube/config
     fi
 }
-# export KUBECONFIG=$HOME/.kube/config
 
-# Set PATH, MANPATH, etc., for Homebrew.
 if  [ $is_mac ] && [ $is_arm ]; then
+    # Set PATH, MANPATH, etc., for Homebrew.
     eval "$(/opt/homebrew/bin/brew shellenv)"
+
+    export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
+    export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
 fi
