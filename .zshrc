@@ -197,7 +197,7 @@ function ub64dec() {
 
 # mac proxy
 alias setpxy="networksetup -setwebproxystate wi-fi on; networksetup -setsecurewebproxystate wi-fi on"
-alias usetpxy="networksetup -setwebproxystate wi-fi off; networksetup -setsecurewebproxystate wi-fi off"
+alias unsetpxy="networksetup -setwebproxystate wi-fi off; networksetup -setsecurewebproxystate wi-fi off"
 
 alias tmux="env TERM=screen-256color tmux"
 
@@ -219,7 +219,7 @@ export BAT_PAGER="less $LESS"
 # fixes error: Inappropriate ioctl for device gpg: problem with the agent
 export GPG_TTY=$(tty)
 
-if [ $((RANDOM%15)) -eq 0 ]; then
+if [ -x "$(command -v fortune)" ] && [ -x "$(command -v cowsay)" ] && [ -x "$(command -v lolcat)" ] && [ $((RANDOM%15)) -eq 0 ]; then
     fortune | cowsay -f $(cowsay -l | tail -n +2 | tr ' ' '\n' | shuf -n 1) | lolcat -a -f -t -s 5000 || true
 fi
 
