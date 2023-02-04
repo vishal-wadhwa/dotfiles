@@ -1020,6 +1020,9 @@ Plug 'chrisbra/csv.vim'
 " GitHub codeowners
 Plug 'rhysd/vim-syntax-codeowners'
 
+" postgres syntax highlighting
+Plug 'lifepillar/pgsql.vim'
+
 " TODO - to be tried later
 " https://github.com/nvim-telescope/telescope.nvim
 
