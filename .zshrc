@@ -139,10 +139,11 @@ export NVM_DIR="$HOME/.nvm"
 # load node without nvm
 export PATH="$NVM_DIR/versions/node/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/$(cat $NVM_DIR/alias/default)))/bin:$PATH"
 # works after running nvm twice
-if  [ $is_mac ] && [ $is_arm ]; then
-    alias nvm="unalias nvm; [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"; [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm";  nvm $@"
-else
-    alias nvm="unalias nvm; [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"; [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm";  nvm $@"
+if  [ $is_mac ]; then
+    nvm_base_path="$(brew --prefix nvm)"
+    if [ $nvm_base_path != '' ]; then
+        alias nvm="unalias nvm; [ -s "$nvm_base_path/nvm.sh" ] && . "$nvm_base_path/nvm.sh"; [ -s "$nvm_base_path/etc/bash_completion.d/nvm" ] && . "$nvm_base_path/etc/bash_completion.d/nvm";  nvm $@"
+    fi
 fi
 
 alias vi=nvim
@@ -259,11 +260,29 @@ function kube-merge() {
     fi
 }
 
-if  [ $is_mac ] && [ $is_arm ]; then
+if  [ $is_mac ]; then
     # Set PATH, MANPATH, etc., for Homebrew.
-    eval "$(/opt/homebrew/bin/brew shellenv)"
+    brew_bin_path="$(which brew)" 
+    eval "$($brew_bin_path shellenv)"
 
-    export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@3/lib/pkgconfig"
-    export LDFLAGS="-L/opt/homebrew/opt/openssl@3/lib"
-    export CPPFLAGS="-I/opt/homebrew/opt/openssl@3/include"
+    # always supplement brew --prefix with exact package name, else it gets
+    # terribly slow
+    export PKG_CONFIG_PATH="$(brew --prefix pkg-config)"
+
+    LDFLAGS=""
+    CPPFLAGS=""
+    openssl_base_path="$(brew --prefix openssl@3)"
+    if [ $openssl_base_path != ''  ]; then
+        LDFLAGS="$LDFLAGS -L$openssl_base_path/lib"
+        CPPFLAGS="$CPPFLAGS -I$openssl_base_path/include"
+    fi
+
+    librdkafka_base_path="$(brew --prefix librdkafka)"
+    if [ $librdkafka_base_path != '' ]; then
+        LDFLAGS="$LDFLAGS -L$librdkafka_base_path/lib"
+        CPPFLAGS="$CPPFLAGS -I$librdkafka_base_path/include"
+    fi
+
+    export LDFLAGS
+    export CPPFLAGS
 fi
