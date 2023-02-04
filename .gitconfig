@@ -11,6 +11,7 @@
     ; pager = $HOME/bin/diff-highlight | less
     pager = delta
     trustctime = false
+	editor = nvim
 
 [color]
     ui = auto
