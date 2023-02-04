@@ -482,7 +482,21 @@ endif
 " https://github.com/neovim/pynvim/issues/16#issuecomment-152417012
 " https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
 " Figure out the system Python for Neovim.
-let g:python3_host_prog = $HOME.'/.pyenv/shims/python3'
+function! s:GetBrewPrefix(name)
+  let result = system("brew --prefix " . a:name)
+  if v:shell_error != 0
+    echo "Error: Homebrew package '" . a:name . "' not found."
+    return ""
+  endif
+  return substitute(result, '\n', '', 'g')
+endfunction
+
+if has("unix")
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+      let g:python3_host_prog=s:GetBrewPrefix("python@3.9").'/bin/python3.9'
+  endif
+endif
 " ------------------------------------
 
 
