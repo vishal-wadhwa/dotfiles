@@ -12,22 +12,6 @@
             "initializationOptions": {},
             "settings": {}
         },
-        "go": {
-            "command": "gopls",
-            "args": [
-                "-remote=auto"
-            ],
-            "rootPatterns": [
-                "go.mod",
-                ".git",
-                "Gopkg.toml",
-                "main.go"
-            ],
-            "filetypes": [
-                "go"
-            ],
-            "trace.server": "verbose"
-        },
         "intelephense": {
             "command": "intelephense",
             "args": [
@@ -240,9 +224,10 @@
     "python.formatting.provider": "black",
     "pyright.organizeimports.provider": "isort",
     "python.analysis.diagnosticMode":"workspace",
-    "coc.preferences.formatOnSaveFiletypes": [
-        "python"
-    ],
+    "coc.preferences.formatOnSave": true,
     "suggest.noselect": false,
-    "suggest.enablePreselect": true
+    "suggest.enablePreselect": false,
+    "go.goplsOptions": {
+        "completeUnimported": true
+    }
 }

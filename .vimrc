@@ -66,6 +66,9 @@ syntax on
 filetype plugin indent on
 au BufNewFile,BufRead *Jenkinsfile* setf groovy
 
+" organize imports in go
+au BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
 " Show matching brackets when text indicator is over them
 set showmatch
 
@@ -146,7 +149,9 @@ augroup formatters
     " || true at the end is to avoid NZEC in phpcbf for multiple reasons
     " use phpcs --config-set to set standards
     autocmd FileType php setlocal equalprg=phpcbf\ -d\ memory_limit=512M\ \|\|\ true
+    au BufWrite *.py call CocAction('format')
 augroup END
+
 
 " Function to trim whitespace and preserve cursor position and history
 fun! TrimWhitespace()
@@ -772,6 +777,7 @@ let g:go_doc_keywordprg_enabled = 0
 " let g:go_list_type = "quickfix"
 let g:go_debug_address = '127.0.0.1:40000'
 " let g:go_debug_substitue_paths = [ ['/host-path', '/remote-path'] ] 
+let g:go_gopls_options = ['-remote=auto']
 
 " == SYNTASTIC ==
 Plug 'vim-syntastic/syntastic'
@@ -958,7 +964,7 @@ let g:vdebug_options = {}
 let g:vdebug_options['port'] = 9000
 let g:vdebug_options['ide_key'] = 'XDEBUG_IDE_KEY'
 let g:vdebug_options['debug_file_level'] = 2
-let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
+" let g:vdebug_options['debug_file'] = '/tmp/vdebug.log'
 
 " == Terraform ==; more: https://github.com/hashivim/vim-terraform
 Plug 'hashivim/vim-terraform'
