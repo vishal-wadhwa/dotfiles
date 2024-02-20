@@ -599,6 +599,16 @@ let g:ycm_filetype_blacklist = { 'go': 1, 'git': 1,  'notes': 1, 'diff': 1,
 " == coc.nvim completions ==
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Install extensions scripts: npm install --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+let g:coc_global_extensions = [
+            \ 'coc-clangd',
+            \ 'coc-diagnostic', 
+            \ 'coc-docker', 
+            \ 'coc-go',
+            \ 'coc-html', 
+            \ 'coc-java', 
+            \ 'coc-json', 
+            \ 'coc-pyright',
+            \ 'coc-yaml']
 
 " limit suggestions to 10
 set pumheight=10
@@ -914,6 +924,9 @@ augroup vim_colors_xcode
     autocmd vim_colors_xcode ColorScheme * hi SpecialComment cterm=italic gui=italic
 augroup END
 
+" vscode like dark mode
+Plug 'martinsione/darkplus.nvim'
+
 " == git line change signs ==
 " Update Git signs every time the text is changed
 if has('nvim') || has('patch-8.0.902')
@@ -1037,6 +1050,9 @@ Plug 'rhysd/vim-syntax-codeowners'
 " postgres syntax highlighting
 Plug 'lifepillar/pgsql.vim'
 
+" copilot
+Plug 'github/copilot.vim'
+
 " TODO - to be tried later
 " https://github.com/nvim-telescope/telescope.nvim
 
@@ -1046,16 +1062,17 @@ call plug#end()
 " gruvbox
 " colorscheme gruvbox
 
+" dark colour scheme for neovim
+colorscheme darkplus
+
 " xcode
-colorscheme xcodedark
+" colorscheme xcodedark
 " colorscheme xcodedarkhc
 " colorscheme xcodelight
 " colorscheme xcodelighthc
 " colorscheme xcodewwdc
 
 " coc extensions - after plug#end
-" clangd
-call coc#config('clangd.path', coc#util#extension_root().'/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd')
 
 " private vimrc
 try
