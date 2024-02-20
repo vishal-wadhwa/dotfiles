@@ -211,23 +211,26 @@
             "kube*/*.yaml",
             "kube*/*/*.yml",
             "kube*/*/*.yaml",
-            "*service-manifests*.yaml"
+            "*service-manifests*.yaml",
+            "*manifests*.yaml",
+            "*/manifests/**",
+            "kubectl*.yaml"
         ]
     },
     "clangd.arguments": [
-        "-Wall",
-        "-Wextra",
-        "-Wpedantic",
-        "-std=c++14"
+        "--clang-tidy",
     ],
     "python.linting.flake8Enabled": true,
     "python.formatting.provider": "black",
     "pyright.organizeimports.provider": "isort",
-    "python.analysis.diagnosticMode":"workspace",
+    "python.analysis.diagnosticMode": "workspace",
     "coc.preferences.formatOnSave": true,
+    "[json]": {
+        "coc.preferences.formatOnSave": false
+    },
     "suggest.noselect": false,
     "suggest.enablePreselect": false,
     "go.goplsOptions": {
         "completeUnimported": true
-    }
+    },
 }
