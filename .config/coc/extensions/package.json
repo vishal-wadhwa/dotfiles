@@ -8,10 +8,11 @@
     "coc-pyright": ">=1.1.284",
     "coc-yaml": ">=1.9.0",
     "package.json": "^2.0.1",
-    "coc-go": ">=1.3.0",
-    "coc-html": ">=1.8.0"
+    "coc-html": ">=1.8.0",
+    "coc-go": ">=1.3.33",
+    "coc-tsserver": ">=2.2.0"
   },
   "disabled": [],
   "locked": [],
-  "lastUpdate": 1680206542434
+  "lastUpdate": 1716199495115
 }
