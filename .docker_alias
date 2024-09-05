@@ -69,11 +69,12 @@ alias duse="docker system df"
 #################################
 ###### docker-compose ###########
 #################################
+alias dco="docker compose"
 
 # LOGS
-alias dclog="docker-compose logs -f"
-alias dclogt="docker-compose logs -f --tail"
+alias dclog="docker compose logs -f"
+alias dclogt="docker compose logs -f --tail"
 
 # ps
-alias dcps="docker-compose ps"
-alias dcpsa="docker-compose ps -a"
+alias dcps="docker compose ps"
+alias dcpsa="docker compose ps -a"
