@@ -41,6 +41,7 @@ inoremap <Left>  <ESC>:echoe "Use h"<CR>
 inoremap <Right> <ESC>:echoe "Use l"<CR>
 inoremap <Up>    <ESC>:echoe "Use k"<CR>
 inoremap <Down>  <ESC>:echoe "Use j"<CR>
+
 " -------------------------------
 
 " --------- THEME (keep above others)
@@ -603,12 +604,13 @@ let g:coc_global_extensions = [
             \ 'coc-clangd',
             \ 'coc-diagnostic', 
             \ 'coc-docker', 
-            \ 'coc-go',
             \ 'coc-html', 
             \ 'coc-java', 
             \ 'coc-json', 
             \ 'coc-pyright',
-            \ 'coc-yaml']
+            \ 'coc-yaml', 
+            \ 'coc-go',
+            \ 'coc-tsserver']
 
 " limit suggestions to 10
 set pumheight=10
@@ -759,49 +761,64 @@ nnoremap <silent> <leader>cs  :<C-u>CocList -I symbols<cr>
 " nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " == Vim Go ==
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+let vim_plugin = 'vim-go'
+if vim_plugin == 'vim-go'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Test and see if there are any perf issue in syntax highlighting
-" in nvim too?
-if !has('nvim')
-    " use treesitter
-    " let g:go_highlight_structs = 1
-    " let g:go_highlight_methods = 1
-    " let g:go_highlight_functions = 1
-    " let g:go_highlight_operators = 1
-    " let g:go_highlight_build_constraints = 1
-    " let g:go_highlight_function_calls = 1
-    " let g:go_highlight_extra_types = 1
-    " let g:go_highlight_function_parameters = 1
-    " let g:go_highlight_types = 1
-    " let g:go_highlight_fields = 1
-    " let g:go_highlight_generate_tags = 1
-    " let g:go_highlight_variable_declarations = 1
-    " let g:go_highlight_variable_assignments = 1
+    " Test and see if there are any perf issue in syntax highlighting
+    " in nvim too?
+    if !has('nvim')
+        " use treesitter
+        " let g:go_highlight_structs = 1
+        " let g:go_highlight_methods = 1
+        " let g:go_highlight_functions = 1
+        " let g:go_highlight_operators = 1
+        " let g:go_highlight_build_constraints = 1
+        " let g:go_highlight_function_calls = 1
+        " let g:go_highlight_extra_types = 1
+        " let g:go_highlight_function_parameters = 1
+        " let g:go_highlight_types = 1
+        " let g:go_highlight_fields = 1
+        " let g:go_highlight_generate_tags = 1
+        " let g:go_highlight_variable_declarations = 1
+        " let g:go_highlight_variable_assignments = 1
+    endif
+    " let g:go_def_mode='gopls'
+    " let g:go_info_mode='gopls'
+
+    " show type info for word under cursor
+    let g:go_auto_type_info = 1
+    " goimports on save
+    let g:go_fmt_command = 'goimports'
+    " jump to existing buffer
+    let g:go_def_reuse_buffer = 1
+    " run meta lint on save - needs setup
+    let g:go_metalinter_autosave = 0
+    " let g:go_gopls_enabled = 0
+    " rename command
+    let g:go_rename_command = 'gopls'
+    " use coc vim - use todo: coc-go
+    let g:go_code_completion_enabled = 0
+    " disable vim-go :GoDef short cut (gd)
+    " this is handled by LanguageClient [LC]
+    let g:go_def_mapping_enabled = 0
+    " disable vim go docs
+    let g:go_doc_keywordprg_enabled = 0
+    " loc window bug with vim-go syntastic
+    " let g:go_list_type = "quickfix"
+    let g:go_debug_address = '127.0.0.1:40000'
+    " let g:go_debug_substitue_paths = [ ['/host-path', '/remote-path'] ] 
+    let g:go_gopls_options = ['-remote=auto']
+else
+    " Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'ray-x/go.nvim'
+    Plug 'ray-x/guihua.lua' " recommended if need floating window support
+
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'rcarriga/nvim-dap-ui'
+    Plug 'theHamsta/nvim-dap-virtual-text'
 endif
-
-" show type info for word under cursor
-let g:go_auto_type_info = 1
-" goimports on save
-let g:go_fmt_command = 'goimports'
-" jump to existing buffer
-let g:go_def_reuse_buffer = 1
-" run meta lint on save - needs setup
-let g:go_metalinter_autosave = 0
-" rename command
-let g:go_rename_command = 'gopls'
-" use coc vim
-let g:go_code_completion_enabled = 0
-" disable vim-go :GoDef short cut (gd)
-" this is handled by LanguageClient [LC]
-let g:go_def_mapping_enabled = 0
-" disable vim go docs
-let g:go_doc_keywordprg_enabled = 0
-" loc window bug with vim-go syntastic
-" let g:go_list_type = "quickfix"
-let g:go_debug_address = '127.0.0.1:40000'
-" let g:go_debug_substitue_paths = [ ['/host-path', '/remote-path'] ] 
-let g:go_gopls_options = ['-remote=auto']
 
 " == SYNTASTIC ==
 Plug 'vim-syntastic/syntastic'
@@ -1052,6 +1069,17 @@ Plug 'lifepillar/pgsql.vim'
 
 " copilot
 Plug 'github/copilot.vim'
+let g:copilot_enabled = v:false
+
+" codeium (free copilot)
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+
+" diff view
+
+if has('nvim')
+    Plug 'sindrets/diffview.nvim'
+    Plug 'nvim-tree/nvim-web-devicons'
+endif
 
 " TODO - to be tried later
 " https://github.com/nvim-telescope/telescope.nvim
