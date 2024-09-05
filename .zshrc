@@ -155,6 +155,9 @@ export PATH="$PATH:$HOME/.composer/vendor/bin"
 export PATH="$PATH:$HOME/bin"
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
+# kubectl plugin manager - krew
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # you_should_use extension
 export YSU_MESSAGE_POSITION="after"
 
@@ -271,8 +274,8 @@ if  [ $is_mac ]; then
     # terribly slow
     export PKG_CONFIG_PATH="$(brew --prefix pkg-config)"
 
-    LDFLAGS=""
-    CPPFLAGS=""
+    LDFLAGS="-L/opt/homebrew/lib"
+    CPPFLAGS="-I/opt/homebrew/include"
     openssl_base_path="$(brew --prefix openssl@3)"
     if [ $openssl_base_path != ''  ]; then
         LDFLAGS="$LDFLAGS -L$openssl_base_path/lib"
@@ -285,9 +288,9 @@ if  [ $is_mac ]; then
         CPPFLAGS="$CPPFLAGS -I$librdkafka_base_path/include"
     fi
 
-    LDFLAGS="${LDFLAGS:1}"
-    CPPFLAGS="${CPPFLAGS:1}"
-
     export LDFLAGS
     export CPPFLAGS
 fi
+
+
+test -e /Users/vishal.wadhwazomato.com/.iterm2_shell_integration.zsh && source /Users/vishal.wadhwazomato.com/.iterm2_shell_integration.zsh || true
