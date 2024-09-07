@@ -483,19 +483,22 @@ endif
 " https://github.com/neovim/pynvim/issues/16#issuecomment-152417012
 " https://github.com/neovim/neovim/issues/1887#issuecomment-280653872
 " Figure out the system Python for Neovim.
-function! s:GetBrewPrefix(name)
-  let result = system("brew --prefix " . a:name)
-  if v:shell_error != 0
-    echo "Error: Homebrew package '" . a:name . "' not found."
-    return ""
-  endif
-  return substitute(result, '\n', '', 'g')
-endfunction
+" Comment out to use the pyenv installed python.
+" Doc: https://neovim.io/doc/user/provider.html
+" function! s:GetBrewPrefix(name)
+"   let result = system("brew --prefix " . a:name)
+"   if v:shell_error != 0
+"     echo "Error: Homebrew package '" . a:name . "' not found."
+"     return ""
+"   endif
+"   return substitute(result, '\n', '', 'g')
+" endfunction
 
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
-      let g:python3_host_prog=s:GetBrewPrefix("python@3.9").'/bin/python3.9'
+      let g:python3_host_prog=$HOME.'/.virtualenvs/py3nvim/bin/python3'
+      " let g:python3_host_prog=s:GetBrewPrefix("python@3").'/bin/python3'
   endif
 endif
 " ------------------------------------
@@ -1069,13 +1072,13 @@ Plug 'lifepillar/pgsql.vim'
 
 " copilot
 Plug 'github/copilot.vim'
-let g:copilot_enabled = v:false
+let g:copilot_enabled = v:true
 
 " codeium (free copilot)
 Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
+let g:codeium_enabled = v:false
 
 " diff view
-
 if has('nvim')
     Plug 'sindrets/diffview.nvim'
     Plug 'nvim-tree/nvim-web-devicons'
