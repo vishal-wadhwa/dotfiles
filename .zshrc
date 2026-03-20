@@ -130,7 +130,7 @@ export EDITOR="vim"
 export GOPATH="$HOME/go"
 export GOBIN="$HOME/go/bin"
 alias go2=$HOME/code/goroots/go2/bin/go
-export PATH="$HOME/code/goroots/go1.13/bin:$PATH"
+export PATH="$HOME/code/goroots/go1.13/bin:$GOBIN:$PATH"
 
 # https://github.com/nvm-sh/nvm/issues/1277#issuecomment-536218082
 export NVM_DIR="$HOME/.nvm"
@@ -148,7 +148,6 @@ fi
 
 alias vi=nvim
 
-export PATH="$PATH:$GOBIN"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="$PATH:$HOME/.composer/vendor/bin"
@@ -265,6 +264,7 @@ function kube-merge() {
     fi
 }
 
+# C libs and DLL configs
 if  [ $is_mac ]; then
     # Set PATH, MANPATH, etc., for Homebrew.
     brew_bin_path="$(which brew)" 
@@ -290,6 +290,14 @@ if  [ $is_mac ]; then
 
     export LDFLAGS
     export CPPFLAGS
+    export DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH"
+fi
+
+# watchman config
+# set tmp dir for mac-only, to resolve argument too long error
+# when initialising watchman for coc.nvim
+if  [ $is_mac ]; then
+    export TMPDIR="/tmp"
 fi
 
 
