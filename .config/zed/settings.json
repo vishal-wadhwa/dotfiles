@@ -7,9 +7,35 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
-  "theme": "Andromeda",
+  "edit_predictions": {
+    "provider": "zed",
+  },
+  "terminal": {
+    "font_size": 16.0,
+    "max_scroll_history_lines": 10000,
+  },
+  "preview_tabs": {
+    "enabled": false,
+  },
+  "buffer_font_fallbacks": ["Menlo", "Monaco", "Courier New", "monospace"],
+  "buffer_font_family": "FiraCode-Retina",
+  "show_edit_predictions": true,
+  "wrap_guides": [],
+  "base_keymap": "VSCode",
+  "icon_theme": "Zed (Default)",
+  "theme": {
+    "mode": "system",
+    "light": "One Dark",
+    "dark": "One Dark",
+  },
   "vim_mode": true,
   "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "show_whitespaces": "boundary"
+  "buffer_font_size": 15.0,
+  "show_whitespaces": "boundary",
+  "languages": {
+    "Python": {
+      "language_servers": ["ty", "..."],
+    },
+  },
+  "relative_line_numbers": "wrapped",
 }
